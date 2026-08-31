@@ -49,10 +49,11 @@ while run:
     with open('pre.json', 'r', encoding="utf-8") as file:
               data = json.load(file)
     sc.fill(col[4])
-    if tm==57:
+    if tm==100:
          player = PR.reader(sc, data)
-         player.namste_Â()
          tm = 0
-    player.polygon()
+         player.namste_Â()
+    player.polygon_shadow()
+    player.line()
     pygame.display.flip()
     tm = tm+1

@@ -97,47 +97,56 @@ class reader:
         self.stog = self.data["store"]
     def polygon(self):
         pygame.draw.polygon(self.sc, self.data["color"], self.stog, width=0)
+        pygame.draw.polygon(self.sc, self.data["color"], self.stog, width=5)
+    def polygon_shadow(self):
+        pygame.draw.polygon(self.sc, self.data["shadow"], self.stog, width=0)
+        pygame.draw.polygon(self.sc, self.data["shadow"], self.stog, width=5)
+    def line_shadow(self):
+        pygame.draw.polygon(self.sc, self.data["shadow"], self.stog, width=5)
+    def line(self):
+        pygame.draw.polygon(self.sc, self.data["color"], self.stog, width=5)
     def namste_Â(self):
         global c, cou
         self.data = self.f
         self.stog = self.data["store"]
-        for _ in range(len(self.data["store"])):
+        for _ in range(len(self.data["store"])//2):
             cou = np.random.randint(0, len(self.data["winds"])-1)
             self.stog[c] = [self.data["store"][c][0]+self.data["winds"][cou],
                             self.data["store"][c][1]]
-            c = c+1
+            c = np.random.randint(0, len(self.data["store"]))
         c = 0
         cou = 0
     def namste_Ç(self):
         global c, cou
         self.data = self.f
         self.stog = self.data["store"]
-        for _ in range(len(self.data["store"])):
+        for _ in range(len(self.data["store"])//2):
             cou = np.random.randint(0, len(self.data["winds"])-1)
             self.stog[c] = [self.data["store"][c][0]-self.data["winds"][cou],
                             self.data["store"][c][1]]
-            c = c+1
+            c = np.random.randint(0, len(self.data["store"]))
         c = 0
         cou = 0
     def namste_Þ(self):
         global c, cou
         self.data = self.f
         self.stog = self.data["store"]
-        for _ in range(len(self.data["store"])):
+        for _ in range(len(self.data["store"])//2):
             cou = np.random.randint(0, len(self.data["winds"])-1)
             self.stog[c] = [self.data["store"][c][0],
                             self.data["store"][c][1]-self.data["winds"][cou]]
-            c = c+1
+            c = np.random.randint(0, len(self.data["store"]))
         c = 0
         cou = 0
     def namste_Ñ(self):
         global c, cou
         self.data = self.f
         self.stog = self.data["store"]
-        for _ in range(len(self.data["store"])):
+        for _ in range(len(self.data["store"])//2):
             cou = np.random.randint(0, len(self.data["winds"])-1)
             self.stog[c] = [self.data["store"][c][0],
                             self.data["store"][c][1]+self.data["winds"][cou]]
-            c = c+1
+            c = np.random.randint(0, len(self.data["store"]))
         c = 0
         cou = 0
+    
