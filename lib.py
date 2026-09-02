@@ -12,6 +12,22 @@ def read(st, h, col, sc):
         b = b+2
     b = 0
     return st, b, h, col, sc
+def gggY(num, st):
+    global b
+    num = []
+    for _ in range((len(st)//2)-1):
+        num.append(st[b+1])
+        b = b+2
+    b = 0
+    return num
+def gggX(num, st):
+    global b
+    num = []
+    for _ in range(len(st)//2):
+        num.append(st[b])
+        b = b+2
+    b = 0
+    return num
 def r2(file, via, st, body):
     global b
     st = [int(line.strip()) for line in file]
@@ -82,6 +98,13 @@ def convert(st, st2, cou):
         b = b+2
     b = 0
     return st2
+def ejc(ind, wind):
+    global c
+    for _ in range(len(wind)):
+          ind = ind+wind[c]
+          c = c+1
+    c = 0
+    return ind
 def pr(body, st, via):
     global b
     for _ in range(len(st)):
@@ -95,58 +118,80 @@ class reader:
         self.f = f
         self.data = f
         self.stog = self.data["store"]
+        self.numb = {'X': np.mean(np.array(gggX(0, f["store"]))), 'Y': np.mean(np.array(gggY(0, f["store"])))}
     def polygon(self):
-        pygame.draw.polygon(self.sc, self.data["color"], self.stog, width=0)
-        pygame.draw.polygon(self.sc, self.data["color"], self.stog, width=5)
+        pygame.draw.polygon(self.sc, self.data["color"],
+                            self.stog, width=0)
+        pygame.draw.polygon(self.sc, self.data["color"],
+                            self.stog, width=5)
     def polygon_shadow(self):
-        pygame.draw.polygon(self.sc, self.data["shadow"], self.stog, width=0)
-        pygame.draw.polygon(self.sc, self.data["shadow"], self.stog, width=5)
+        pygame.draw.polygon(self.sc, self.data["shadow"],
+                            self.stog, width=0)
+        pygame.draw.polygon(self.sc, self.data["shadow"],
+                            self.stog, width=5)
     def line_shadow(self):
-        pygame.draw.polygon(self.sc, self.data["shadow"], self.stog, width=5)
+        pygame.draw.polygon(self.sc, self.data["shadow"],
+                            self.stog, width=5)
     def line(self):
-        pygame.draw.polygon(self.sc, self.data["color"], self.stog, width=5)
+        pygame.draw.polygon(self.sc, self.data["color"],
+                            self.stog, width=5)
     def namste_Â(self):
-        global c, cou
+        global c, cou, b
         self.data = self.f
         self.stog = self.data["store"]
-        for _ in range(len(self.data["store"])//2):
-            cou = np.random.randint(0, len(self.data["winds"])-1)
-            self.stog[c] = [self.data["store"][c][0]+self.data["winds"][cou],
-                            self.data["store"][c][1]]
+        for _ in range(len(self.data["store"])):
+            cou = np.random.randint(0, len(self.data["winds_min"])-1)
+            if b==2:
+                b = 0
+                if self.stog[c][0]>=self.numb['X']:
+                        self.stog[c][0] = self.data["store"][c][0]+self.data["winds_min"][cou]
             c = np.random.randint(0, len(self.data["store"]))
+            b = b+1
         c = 0
-        cou = 0
-    def namste_Ç(self):
-        global c, cou
-        self.data = self.f
-        self.stog = self.data["store"]
-        for _ in range(len(self.data["store"])//2):
-            cou = np.random.randint(0, len(self.data["winds"])-1)
-            self.stog[c] = [self.data["store"][c][0]-self.data["winds"][cou],
-                            self.data["store"][c][1]]
-            c = np.random.randint(0, len(self.data["store"]))
-        c = 0
+        b = 0
         cou = 0
     def namste_Þ(self):
-        global c, cou
+        global c, cou, b
         self.data = self.f
         self.stog = self.data["store"]
-        for _ in range(len(self.data["store"])//2):
-            cou = np.random.randint(0, len(self.data["winds"])-1)
-            self.stog[c] = [self.data["store"][c][0],
-                            self.data["store"][c][1]-self.data["winds"][cou]]
+        for _ in range(len(self.data["store"])):
+            cou = np.random.randint(0, len(self.data["winds_min"])-1)
+            if b==2:
+                b = 0
+                if self.stog[c][1]<=self.numb['Y']:
+                        self.stog[c][1] = self.data["store"][c][1]-self.data["winds_min"][cou]
             c = np.random.randint(0, len(self.data["store"]))
+            b = b+1
         c = 0
+        b = 0
         cou = 0
     def namste_Ñ(self):
-        global c, cou
+        global c, cou, b
         self.data = self.f
         self.stog = self.data["store"]
-        for _ in range(len(self.data["store"])//2):
-            cou = np.random.randint(0, len(self.data["winds"])-1)
-            self.stog[c] = [self.data["store"][c][0],
-                            self.data["store"][c][1]+self.data["winds"][cou]]
+        for _ in range(len(self.data["store"])):
+            cou = np.random.randint(0, len(self.data["winds_min"])-1)
+            if b==2:
+                b = 0
+                if self.stog[c][1]>=self.numb['Y']:
+                        self.stog[c][1] = self.data["store"][c][1]+self.data["winds_min"][cou]
             c = np.random.randint(0, len(self.data["store"]))
+            b = b+1
         c = 0
+        b = 0
         cou = 0
-    
+    def namste_Ç(self):
+        global c, cou, b
+        self.data = self.f
+        self.stog = self.data["store"]
+        for _ in range(len(self.data["store"])):
+            cou = np.random.randint(0, len(self.data["winds_min"])-1)
+            if b==2:
+                b = 0
+                if self.stog[c][0]<=self.numb['X']:
+                        self.stog[c][0] = self.data["store"][c][0]-self.data["winds_min"][cou]
+            c = np.random.randint(0, len(self.data["store"]))
+            b = b+1
+        c = 0
+        b = 0
+        cou = 0

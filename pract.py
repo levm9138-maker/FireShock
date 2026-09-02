@@ -26,6 +26,11 @@ while run:
                           st.append([pos[0], pos[1]])
                           st2.append(st[0])
         pg.display.flip()
-sttts = {"store": st2, "color": gr, "winds": [0,0,0,1,2,10,20,30,40,0,0,0], "shadow": (gr[0]//2, gr[1]//2, gr[2]//2)}
+sttts = {"store": st2,
+         "color": gr,
+         "winds": [0,1,2],
+         "winds_min": [0,1,2,3,4,4,4,3,2,1,0],
+         "shadow": (gr[0]//2, gr[1]//2, gr[2]//2),
+         "winds_max": [0,10,20,30,40,40,40,30,20,10,0]}
 with open(f'{strin}.json', 'w', encoding='utf-8') as file:
     json.dump(sttts, file, ensure_ascii=False, indent=4)
