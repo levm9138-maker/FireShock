@@ -36,7 +36,7 @@ def on_release(key):
     F = 0
 listener = keyboard.Listener(on_press=on_press, on_release=on_release)
 listener.start()
-with open('player.json', 'r', encoding="utf-8") as file:
+with open('app.json', 'r', encoding="utf-8") as file:
               data = json.load(file)
 player = PR.object(data, 400, 300)
 run = True
@@ -48,5 +48,6 @@ while run:
     if tm==100:
          tm = 0
     PR.draw.polygon(sc, player)
+    PR.draw.line(sc, player, (0,0,0))
     pygame.display.flip()
     tm = tm+1

@@ -9,6 +9,7 @@ strin = str(input('File:'))
 v = int(input('line_strong:'))
 st = []
 lt = 0
+b = 0
 blu = (255, 255, 255)
 gr = (int(input('red:')), int(input('green:')), int(input('blue:')))
 sc.fill(blu)
@@ -32,6 +33,10 @@ while run:
                   st2  = []
                   st = []
                   sc.fill((128,128,128))
+                  for _ in range(len(stts)):
+                      pg.draw.polygon(sc, (255,0,0), stts[b], width=3)
+                      b = b+1
+                  b = 0
         pg.display.flip()
 sttts = {"store": stts,
          "color": gr,
