@@ -8,10 +8,12 @@ run = True
 strin = str(input('File:'))
 v = int(input('line_strong:'))
 st = []
+lt = 0
 blu = (255, 255, 255)
 gr = (int(input('red:')), int(input('green:')), int(input('blue:')))
 sc.fill(blu)
 st2 = []
+stts = []
 while run:
         for event in pg.event.get():
                 if event.type == pg.QUIT:
@@ -25,8 +27,13 @@ while run:
                           st = []
                           st.append([pos[0], pos[1]])
                           st2.append(st[0])
+                if event.type == pg.KEYDOWN:
+                  stts.append(st2)
+                  st2  = []
+                  st = []
+                  sc.fill((128,128,128))
         pg.display.flip()
-sttts = {"store": st2,
+sttts = {"store": stts,
          "color": gr,
          "winds": [0,1,2],
          "winds_min": [0,1,2,3,4,4,4,3,2,1,0],

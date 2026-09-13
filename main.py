@@ -36,29 +36,17 @@ def on_release(key):
     F = 0
 listener = keyboard.Listener(on_press=on_press, on_release=on_release)
 listener.start()
-datas = []
 with open('player.json', 'r', encoding="utf-8") as file:
               data = json.load(file)
-with open('terra.json', 'r', encoding="utf-8") as file:
-              ter = json.load(file)
-player = PR.reader(sc, data, xuu, yuu)
-terra = PR.reader(sc, ter, 0, 500)
+player = PR.object(data, 400, 300)
 run = True
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
     sc.fill(col[4])
-    with open('player.json', 'r', encoding="utf-8") as file:
-              data = json.load(file)
-    with open('terra.json', 'r', encoding="utf-8") as file:
-              ter = json.load(file)
     if tm==100:
          tm = 0
-         terra = PR.reader(sc, ter, 400, 500)
-         terra.namste_3()
-    player = PR.reader(sc, data, 100, 100)
-    player.polygon()
-    terra.draw()
+    PR.draw.polygon(sc, player)
     pygame.display.flip()
     tm = tm+1

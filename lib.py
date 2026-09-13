@@ -119,58 +119,42 @@ class count:
         self.num = num
     def draw(self):
         pygame.draw.rect(sc, (255, 0, 0), (0, 40, self.num, 40))
-class reader:
-    def __init__(self, sc, f, x, y):
+
+class draw:
+    @classmethod
+    def polygon(sc, obj):
         global b
-        self.sc = sc
-        self.sr = int(np.mean(np.array(f["store"])))
-        for _ in range(len(f["store"])):
-            f["store"][b][0] = f["store"][b][0]-self.sr
-            f["store"][b][1] = f["store"][b][1]-self.sr
+        for _ in range(len(obj.data["store"])):
+            pygame.draw.polygon(sc, obj.data["color"], obj.data["store"][b], width=0)
             b = b+1
         b = 0
-        for _ in range(len(f["store"])):
-            f["store"][b][0] = f["store"][b][0]+x
-            f["store"][b][1] = f["store"][b][1]+y
-            b = b+1
-        b = 0
-        self.f = f
-        self.data = f
-        self.stog = self.data["store"]
-        self.numb = {'X': np.mean(np.array(gggX(0, f["store"]))),
-                     'Y': np.mean(np.array(gggY(0, f["store"])))}
-        b = 0
-    def draw(self):
-        reader.polygon(self)
-        reader.polygon_shadow(self)
-        reader.line(self)
-    def polygon(self):
-        pygame.draw.polygon(self.sc, self.data["color"], self.stog, width=0)
-    def polygon_shadow(self):
+    @classmethod
+    def polygon_shadow_1(self):
         global st, b
         for _ in range(len(self.stog)):
-            if self.stog[b][1]>self.numb['Y']:
+            if self.stog[b][0]>self.numb['X']:
                 st.append(self.stog[b])
             b += 1
         pygame.draw.polygon(self.sc, self.data["shadow"], st, width=0)
         st = []
         b = 0
+    @classmethod
     def line(self):
         pygame.draw.polygon(self.sc, self.data["color"], self.stog, width=5)
+    @classmethod
     def namste_1(self):
-        global c, cou, b
+        global c, cou
+        c = 0
         self.data = self.f
         self.stog = self.data["store"]
         for _ in range(len(self.data["store"])):
             cou = np.random.randint(0, len(self.data["winds_min"])-1)
-            if b==2:
-                b = 0
-                self.stog[c][0] = self.data["store"][c][0]+self.data["winds_min"][cou]
-            c = np.random.randint(0, len(self.data["store"]))
-            b = b+1
+            self.stog[c][0] = self.data["store"][c][0]+self.data["winds_min"][cou]
+            self.stog[c][1] = self.data["store"][c][1]+self.data["winds_min"][cou]
+            c = c+1
         c = 0
-        b = 0
         cou = 0
+    @classmethod
     def namste_2(self):
         global c, cou, b
         self.data = self.f
@@ -180,36 +164,33 @@ class reader:
             if b==2:
                 b = 0
                 self.stog[c][1] = self.data["store"][c][1]-self.data["winds_min"][cou]
-            c = np.random.randint(0, len(self.data["store"]))
-            b = b+1
-        c = 0
-        b = 0
-        cou = 0
-    def namste_3(self):
-        global c, cou, b
-        self.data = self.f
-        self.stog = self.data["store"]
-        for _ in range(len(self.data["store"])):
-            cou = np.random.randint(0, len(self.data["winds_min"])-1)
-            if b==2:
-                b = 0
-                self.stog[c][1] = self.data["store"][c][1]+self.data["winds_min"][cou]
-            c = np.random.randint(0, len(self.data["store"]))
-            b = b+1
-        c = 0
-        b = 0
-        cou = 0
-    def namste_4(self):
-        global c, cou, b
-        self.data = self.f
-        self.stog = self.data["store"]
-        for _ in range(len(self.data["store"])):
-            cou = np.random.randint(0, len(self.data["winds_min"])-1)
-            if b==2:
-                b = 0
                 self.stog[c][0] = self.data["store"][c][0]-self.data["winds_min"][cou]
             c = np.random.randint(0, len(self.data["store"]))
             b = b+1
         c = 0
         b = 0
         cou = 0
+    @classmethod
+    def polygon_shadow_2(self):
+        global st, b
+        for _ in range(len(self.stog)):
+            if self.stog[b][0]<self.numb['X']:
+                st.append(self.stog[b])
+            b += 1
+        pygame.draw.polygon(self.sc, self.data["shadow"], st, width=0)
+        st = []
+        b = 0
+
+class object:
+    def __init__(self, f, x, y):
+        global b
+        self.sr = int(np.mean(np.array(f["store"])))
+        self.f = f
+        self.data = f
+        self.color = f["color"]
+        self.stog = self.data["store"]
+        self.numb = []
+        for i in f:
+            self.numb.append({'X': np.mean(np.array(gggX(0, f["store"][b]))),'Y': np.mean(np.array(gggY(0, f["store"][b])))})
+            b = b+1
+        b = 0
