@@ -135,15 +135,33 @@ class draw:
             pygame.draw.polygon(sc, col, obj.data["store"][b], width=3)
             b = b+1
         b = 0
+    @classmethod
+    def polygon_shadow_1(cls, sc, obj):
+        global st, b, c
+        for _ in range(len(obj.data["store"])):
+            for _ in range(len(obj.data["store"][b])):
+                if obj.data["store"][b][c][0]>obj.numb[b]['X']:
+                    st.append(obj.data["store"][b][c])
+                c = c+1
+                if len(st)>2:
+                    pygame.draw.polygon(sc, obj.data["shadow"][b], st, width=0)
+                    print(obj.numb[b]['X'])
+            st = []
+            b += 1
+            c = 0
+        b = 0
+        c = 0
+        st = []
 class object:
     def __init__(self, f, x, y):
-        global b
+        global b, c
         self.f = f
         self.data = f
         self.color = f["color"]
-        self.stog = self.data["store"]
         self.numb = []
-        for i in f:
-            self.numb.append({'X': np.mean(np.array(gggX(0, f["store"][b]))),'Y': np.mean(np.array(gggY(0, f["store"][b])))})
-            b = b+1
+        for i in f["store"]:
+            self.numb.append({'X': np.mean(np.array(f["store"][b])),
+            'Y': np.mean(np.array(f["store"][b]))})
+            b += 1
         b = 0
+        c = 0

@@ -13,19 +13,6 @@ for _ in range(len(f["store"])):
 =====================
 ==================
     @classmethod
-    def polygon_shadow_1(self):
-        global st, b
-        for _ in range(len(self.stog)):
-            if self.stog[b][0]>self.numb['X']:
-                st.append(self.stog[b])
-            b += 1
-        pygame.draw.polygon(self.sc, self.data["shadow"], st, width=0)
-        st = []
-        b = 0
-    @classmethod
-    def line(self):
-        pygame.draw.polygon(self.sc, self.data["color"], self.stog, width=5)
-    @classmethod
     def namste_1(self):
         global c, cou
         c = 0

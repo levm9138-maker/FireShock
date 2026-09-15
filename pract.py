@@ -41,11 +41,17 @@ while run:
                   grs.append(gr)
                   gr = [int(input('red:')), int(input('green:')), int(input('blue:'))]
         pg.display.flip()
+shw = []
+b = 0
+for _ in range(len(grs)):
+  shw.append([grs[b][0]-(grs[b][0]//2),grs[b][1]-(grs[b][1]//2),grs[b][2]-(grs[b][2]//2)])
+  b = b+1
+b = 0
 sttts = {"store": stts,
          "color": grs,
          "winds": [0,1,2],
          "winds_min": [0,1,2,3,4,4,4,3,2,1,0],
-         "shadow": (gr[0]//2, gr[1]//2, gr[2]//2),
+         "shadow": shw,
          "winds_max": [0,10,20,30,40,40,40,30,20,10,0]}
 with open(f'{strin}.json', 'w', encoding='utf-8') as file:
     json.dump(sttts, file, ensure_ascii=False, indent=4)
