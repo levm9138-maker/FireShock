@@ -11,10 +11,11 @@ st = []
 lt = 0
 b = 0
 blu = (255, 255, 255)
-gr = (int(input('red:')), int(input('green:')), int(input('blue:')))
+gr = [int(input('red:')), int(input('green:')), int(input('blue:'))]
 sc.fill(blu)
 st2 = []
 stts = []
+grs = []
 while run:
         for event in pg.event.get():
                 if event.type == pg.QUIT:
@@ -37,9 +38,11 @@ while run:
                       pg.draw.polygon(sc, (255,0,0), stts[b], width=3)
                       b = b+1
                   b = 0
+                  grs.append(gr)
+                  gr = [int(input('red:')), int(input('green:')), int(input('blue:'))]
         pg.display.flip()
 sttts = {"store": stts,
-         "color": gr,
+         "color": grs,
          "winds": [0,1,2],
          "winds_min": [0,1,2,3,4,4,4,3,2,1,0],
          "shadow": (gr[0]//2, gr[1]//2, gr[2]//2),

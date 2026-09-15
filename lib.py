@@ -125,7 +125,7 @@ class draw:
     def polygon(cls, sc, obj):
         global b
         for _ in range(len(obj.data["store"])):
-            pygame.draw.polygon(sc, obj.data["color"], obj.data["store"][b], width=0)
+            pygame.draw.polygon(sc, obj.data["color"][b], obj.data["store"][b], width=0)
             b = b+1
         b = 0
     @classmethod
