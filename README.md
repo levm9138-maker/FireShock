@@ -1,4 +1,2 @@
-# FireShock
-# It's mini system for a drawing
-# Writted on python
-# =============================
+FireShock 
+Я создал это для личного использования в целях создания своих изображений
