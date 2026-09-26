@@ -36,17 +36,21 @@ def on_release(key):
     F = 0
 listener = keyboard.Listener(on_press=on_press, on_release=on_release)
 listener.start()
-with open('app.json', 'r', encoding="utf-8") as file:
+with open('qpp.json', 'r', encoding="utf-8") as file:
               data = json.load(file)
-player = PR.object(data, 400, 300)
+player = PR.Object(data, 400, 300)
 run = True
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+    if tm==100:
+        player = PR.draw.retr(player, 'qpp.json', 400, 300)
+        player = PR.draw.namste_1(player)
+        PR.draw.polygon_shadow_1(sc, player)
+        tm = 0
     sc.fill(col[4])
     PR.draw.polygon(sc, player)
-    PR.draw.polygon_shadow_1(sc, player)
     PR.draw.line(sc, player, (0,0,0))
     pygame.display.flip()
     tm = tm+1

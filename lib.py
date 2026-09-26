@@ -13,7 +13,7 @@ def read(st, h, col, sc):
         b = b+2
     b = 0
     return st, b, h, col, sc
-def gggY(num, st):
+def Y(num, st):
     global b
     num = []
     for _ in range((len(st)//2)-1):
@@ -21,7 +21,7 @@ def gggY(num, st):
         b = b+2
     b = 0
     return num
-def gggX(num, st):
+def X(num, st):
     global b
     num = []
     for _ in range(len(st)//2):
@@ -140,19 +140,49 @@ class draw:
         global st, b, c
         for _ in range(len(obj.data["store"])):
             for _ in range(len(obj.data["store"][b])):
-                if obj.data["store"][b][c][0]>obj.numb[b]['X']:
+                if obj.data["store"][b][c][0]<int(obj.numb[b]['X']):
                     st.append(obj.data["store"][b][c])
                 c = c+1
-                if len(st)>2:
-                    pygame.draw.polygon(sc, obj.data["shadow"][b], st, width=0)
-                    print(obj.numb[b]['X'])
+                pygame.draw.polygon(sc, obj.data["shadow"][b], st, width=0)
+                print(obj.numb[b]['X'])
             st = []
             b += 1
             c = 0
         b = 0
         c = 0
         st = []
-class object:
+    @classmethod
+    def namste_1(cls, obj):
+        global c, cou, b
+        c = 0
+        cou = 0
+        obj.data = obj.f
+        obj.stog = obj.data["store"]
+        for _ in range(len(obj.data["store"])):
+            for _ in range(len(obj.data["store"][b])):
+                cou = np.random.randint(0, len(obj.data["winds_min"])-1)
+                obj.data["store"][b][c][0] = obj.data["store"][b][c][0]+obj.data["winds_min"][cou]
+                obj.data["store"][b][c][1] = obj.data["store"][b][c][1]+obj.data["winds_min"][cou]
+                c = c+1
+            c = 0
+            b = b+1
+        c = 0
+        b = 0
+        cou = 0
+        return obj
+    @classmethod
+    def retr(cls, obj, file, x, y):
+        global c, b, cou
+        with open(file, 'r', encoding="utf-8") as f:
+              cou = json.load(f)
+        obj = Object(cou, x, y)
+        if obj.data["store"]==cou["store"]:
+            print(f'True')
+        else:
+            print(f'False')
+        cou = 0
+        return obj
+class Object:
     def __init__(self, f, x, y):
         global b, c
         self.f = f
