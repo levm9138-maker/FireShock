@@ -182,7 +182,7 @@ class draw:
             print(f'False')
         cou = 0
         return obj
-class Object:
+class object:
     def __init__(self, f, x, y):
         global b, c
         self.f = f
