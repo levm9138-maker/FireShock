@@ -175,7 +175,7 @@ class draw:
         global c, b, cou
         with open(file, 'r', encoding="utf-8") as f:
               cou = json.load(f)
-        obj = Object(cou, x, y)
+        obj = object(cou, x, y)
         if obj.data["store"]==cou["store"]:
             print(f'True')
         else:
